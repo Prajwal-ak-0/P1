@@ -2,9 +2,7 @@ import { LoginForm } from "@/components/Auth/LoginForm"
 
 const LoginPage = () => {
     return (
-        <div>
-            <LoginForm/>
-        </div>
+        <LoginForm />
     )
 }
 
