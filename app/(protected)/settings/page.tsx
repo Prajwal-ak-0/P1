@@ -1,22 +1,20 @@
-import { auth, signOut } from '@/auth'
-import React from 'react'
+"use client";
 
-const page =async () => {
-    const session = await auth();
-  return (
-    <div>
-        {JSON.stringify(session)}
-        <form action={async () => {
-          "use server";
+import { useCurrentUser } from "@/hooks/useCurrentUser";
+import { signOut } from "next-auth/react";
 
-          await signOut();
-        }}>
-          <button type='submit'>
-            Sign Out
-          </button>
-        </form>
-    </div>
-  )
+const Page = () => {
+    const user = useCurrentUser();
+
+    const onClick = () => {
+        signOut();
+    }
+
+    return (
+        <div>
+            
+        </div>
+    )
 }
 
-export default page
+export default Page;
