@@ -4,6 +4,7 @@ import { db } from '@/lib/db'
 import authConfig from '@/auth.config'
 import { getUserById } from './lib/getUser'
 import { UserRole } from '@prisma/client'
+import { getTwoFactorConfirmationByUserId } from './data/TwoFactorConfirmation'
 
 export const {
     handlers: { GET, POST },
@@ -11,52 +12,62 @@ export const {
     signIn,
     signOut,
 } = NextAuth({
-    pages:{
-        signIn:"/auth/login",
-        error:"/auth/error",
+    pages: {
+        signIn: "/auth/login",
+        error: "/auth/error",
     },
-    events:{
-        async linkAccount({user}) {
+    events: {
+        async linkAccount({ user }) {
             await db.user.update({
-                where: { 
-                    id: user.id 
+                where: {
+                    id: user.id
                 },
-                data: { 
+                data: {
                     emailVerified: new Date(),
-                 }
+                }
             })
         }
     },
-    callbacks:{
-        async signIn({user, account}){
-            if(account?.provider === "credentials") {
+    callbacks: {
+        async signIn({ user, account }) {
+            if (account?.provider === "credentials") {
                 return true;
             }
-            
+
             const existingUser = await getUserById(user.id);
-            if(!existingUser || !existingUser.emailVerified) {
+            if (!existingUser || !existingUser.emailVerified) {
                 return false;
             }
 
-            return true;    
+            if (existingUser.isTwoFactorEnabled) {
+                const twoFactorConfirmation = await getTwoFactorConfirmationByUserId(existingUser.id);
+
+                if (!twoFactorConfirmation) return false;
+
+                await db.twoFactorConfirmation.delete({
+                    where: { id: twoFactorConfirmation.id }
+                });
+            }
+
+            return true;
         },
-        async session({session, token}) {
-            if(session.user && token.sub) {
+        async session({ session, token }) {
+            if (session.user && token.sub) {
                 session.user.id = token.sub
             }
 
-            if(token.role && session.user) {
+            if (token.role && session.user) {
                 session.user.role = token.role as UserRole
             }
-            
+
             return session;
         },
-        async jwt({token}) {
-            if(!token.sub) return token;
+        async jwt({ token }) {
+            if (!token.sub) return token;
 
             const existingUser = await getUserById(token.sub);
 
-            if(!existingUser) return token;
+            if (!existingUser) return token;
 
             token.role = existingUser.role
             return token;

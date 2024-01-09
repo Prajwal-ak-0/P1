@@ -23,8 +23,8 @@ model User {
   password      String?
   role          UserRole @default(USER)
   accounts      Account[]
-  // isTwoFactorEnabled Boolean @default(false)
-  // twoFactorConfirmation TwoFactorConfirmation?
+  isTwoFactorEnabled Boolean @default(false)
+  twoFactorConfirmation TwoFactorConfirmation?
 }
 
 model Account {
@@ -73,11 +73,11 @@ model TwoFactorToken {
   @@unique([email, token])
 }
 
-// model TwoFactorConfirmation {
-//   id String @id @default(cuid())
+model TwoFactorConfirmation {
+  id String @id @default(cuid())
 
-//   userId String
-//   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-//   @@unique([userId])
-// }
+  @@unique([userId])
+}
