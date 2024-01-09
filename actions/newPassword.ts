@@ -5,7 +5,7 @@ import bcrypt from "bcryptjs";
 
 import { NewPasswordSchema } from "@/schemas";
 import { getPasswordResetTokenByToken } from "@/data/PasswordResetToken";
-import { getUserByEmail } from "@/lib/getUser";
+import { getUserByEmail } from "@/data/user";
 import { db } from "@/lib/db";
 
 export const newPassword = async (

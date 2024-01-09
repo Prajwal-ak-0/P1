@@ -5,7 +5,7 @@ import Github from "next-auth/providers/github";
 import Google from "next-auth/providers/google";
 
 import { LoginSchema } from "@/schemas";
-import { getUserByEmail } from "@/lib/getUser";
+import { getUserByEmail } from "@/data/user";
 
 export default {
   providers: [
@@ -14,8 +14,8 @@ export default {
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     }),
     Github({
-      clientId: process.env.GITHUB_CLIENT_ID,
-      clientSecret: process.env.GITHUB_CLIENT_SECRET,
+      clientId: process.env.GITHUB_ID,
+      clientSecret: process.env.GITHUB_SECRET,
     }),
     Credentials({
       async authorize(credentials) {

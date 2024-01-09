@@ -5,14 +5,14 @@ import { signIn } from '@/auth';
 import { LoginSchema } from '@/schemas';
 import * as z from 'zod';
 import { DEFAULT_LOGIN_REDIRECT } from './../routes';
-import { getUserByEmail } from "@/lib/getUser";
+import { getUserByEmail } from "@/data/user";
 import { generateTwoFactorToken, generateVerificationToken } from "@/lib/tokens";
 import { sendTwoFactorTokenEmail, sendVerificationEmail } from "@/lib/mail";
 import { db } from "@/lib/db";
 import { getTwoFactorConfirmationByUserId } from "@/data/TwoFactorConfirmation";
 import { getTwoFactorTokenByEmail } from "@/data/TwoFactorToken";
 
-export const login = async (values: z.infer<typeof LoginSchema>) => {
+export const login = async (values: z.infer<typeof LoginSchema>, callbackUrl?:string | null) => {
     const validatedFields = LoginSchema.safeParse(values);
 
     if (!validatedFields.success) {
@@ -91,7 +91,7 @@ export const login = async (values: z.infer<typeof LoginSchema>) => {
       }
 
     try {
-        await signIn('credentials', { email, password, redirectTo: DEFAULT_LOGIN_REDIRECT });
+        await signIn('credentials', { email, password, redirectTo: callbackUrl || DEFAULT_LOGIN_REDIRECT });
     } catch (error) {
         if (error instanceof AuthError) {
             switch (error.type) {
