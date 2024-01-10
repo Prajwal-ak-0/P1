@@ -18,7 +18,7 @@ const Navbar = ({
     const router = useRouter();
 
     return (
-        <div className="flex justify-between h-20  shadow-lg items-center bg- text-white p-4">
+        <div className="flex dark:shadow-neutral-600  justify-between h-20  shadow-lg items-center bg- text-white p-4">
             <div className='md:ml-12'>
                 <Logo />
             </div>
