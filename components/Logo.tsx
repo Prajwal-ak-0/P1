@@ -1,8 +1,12 @@
-import React from 'react'
+"use client";
+
+import { useRouter } from "next/navigation";
 
 const Logo = () => {
+  const router = useRouter();
+
   return (
-    <div className="text-black text-3xl font-bold">
+    <div onClick={() => router.push('/')} className="dark:text-white text-black cursor-pointer  text-3xl font-bold">
       LOGO
     </div>
   )

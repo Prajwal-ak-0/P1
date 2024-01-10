@@ -3,6 +3,7 @@
 import { Button } from './ui/button'
 import Logo from './Logo'
 import { useRouter } from 'next/navigation'
+import { ModeToggle } from './ModeToggle';
 
 interface NavbarProps {
     isLogin?: boolean;
@@ -36,6 +37,7 @@ const Navbar = ({
                         </Button>
                     )
                 }
+                <ModeToggle/>
             </div>
         </div>
     )

@@ -5,7 +5,7 @@ const LoginPage = () => {
     return (
         <>
             <Navbar isLogin />
-            <div className="items-center  justify-center bg-muted flex">
+            <div className="h-full  items-center  justify-center bg-muted flex">
                 <LoginForm />
             </div>
         </>
