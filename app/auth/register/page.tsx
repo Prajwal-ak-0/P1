@@ -1,8 +1,14 @@
 import { RegisterForm } from "@/components/Auth/RegisterForm"
+import Navbar from "@/components/Navbar"
 
 const LoginPage = () => {
     return (
-        <RegisterForm />
+        <>
+            <Navbar isRegister />
+            <div className=" items-center justify-center bg-muted flex">
+                <RegisterForm />
+            </div>
+        </>
     )
 }
 

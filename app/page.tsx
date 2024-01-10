@@ -1,7 +1,4 @@
-import { Button } from '@/components/ui/button'
 import { Poppins } from "next/font/google";
-import { cn } from "@/lib/utils";
-import { LoginButton } from "@/components/Auth/LoginButton";
 import Navbar from '@/components/Navbar';
 
 const font = Poppins({

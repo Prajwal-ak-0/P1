@@ -1,8 +1,14 @@
 import { LoginForm } from "@/components/Auth/LoginForm"
+import Navbar from "@/components/Navbar"
 
 const LoginPage = () => {
     return (
-        <LoginForm />
+        <>
+            <Navbar isLogin />
+            <div className="items-center  justify-center bg-muted flex">
+                <LoginForm />
+            </div>
+        </>
     )
 }
 
