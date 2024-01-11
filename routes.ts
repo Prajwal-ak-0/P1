@@ -33,5 +33,3 @@ export const publicRoutes = [
    * @type {string}
    */
   export const DEFAULT_LOGIN_REDIRECT = "/home";
-
-  // 
