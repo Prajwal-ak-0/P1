@@ -1,4 +1,3 @@
-
 const AuthLayout = ({
   children
 }: {
@@ -6,7 +5,7 @@ const AuthLayout = ({
 }) => {
   return (
     <>
-      <div className="h-full items-center justify-center">
+      <div className=" h-full items-center justify-center">
         {children}
       </div>
     </>

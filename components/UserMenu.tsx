@@ -1,16 +1,11 @@
 'use client';
 
 import { useCallback, useState } from "react";
-import { AiOutlineMenu } from "react-icons/ai";
-import { signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
-
-
 import MenuItem from "./MenuItem";
 import { useCurrentUser } from "@/hooks/useCurrentUser";
 import Avatar from "./Avatar";
 import { logout } from "@/actions/logout";
-
 
 const UserMenu = () => {
   const router = useRouter();
@@ -23,6 +18,10 @@ const UserMenu = () => {
 
   const user = useCurrentUser();
 
+  const onClick=()=>{
+    logout();
+  }
+
   return (
     <div className="relative">
       <div className="flex flex-row items-center gap-3">
@@ -31,7 +30,7 @@ const UserMenu = () => {
           className="
           p-1
           md:py-1
-          md:px-2
+          md:px-1
           border-[1px] 
           border-neutral-200 
           flex 
@@ -44,9 +43,6 @@ const UserMenu = () => {
           transition
           "
         >
-          <div className="hidden max-sm:block">
-            <AiOutlineMenu />
-          </div>
           <div className=" ">
             <Avatar src={user?.image} />
           </div>
@@ -59,8 +55,9 @@ const UserMenu = () => {
             rounded-xl 
             shadow-md
             w-[40vw]
-            md:w-3/4 
+            md:w-[10vw]
             bg-white 
+            dark:bg-neutral-950
             overflow-hidden 
             right-0 
             top-12 
@@ -72,7 +69,7 @@ const UserMenu = () => {
               <>
                 <MenuItem
                   label="Logout"
-                  onClick={logout}
+                  onClick={onClick}
                 />
                 <MenuItem
                   label="Settings"

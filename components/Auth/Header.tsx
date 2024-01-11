@@ -17,7 +17,7 @@ export const Header = ({
   subLabel
 }: HeaderProps) => {
   return (
-    <div className="w-full flex flex-col gap-y-4 items-center justify-center">
+    <div className="w-full text-center flex flex-col gap-y-4 items-center justify-center">
       <h1 className={cn(
         "text-3xl font-semibold",
         font.className,
