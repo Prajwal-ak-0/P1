@@ -54,7 +54,8 @@ const Navbar = ({
                     )
                 }
             </div>
-            <div className="sm:hidden">
+            <div className="sm:hidden flex max-sm:gap-x-2">
+                <ModeToggle />
                 <UserMenu />
             </div>
         </div>
